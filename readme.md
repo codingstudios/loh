@@ -5,7 +5,8 @@
   
   <h2>Installation</h2>
 <pre>
-npm install -g loh # or using yarn: yarn global add loh
+npm: npm install -g loh 
+yarn: yarn global add loh
   </pre>
 </div>
 
