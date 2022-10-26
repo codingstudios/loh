@@ -25,6 +25,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: |
+        npm i loh
+        yarn add loh
         yarn global add loh
         npm i -g loh@latest
         loh fetch -u https://example.com -o ./output.txt
