@@ -25,6 +25,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: |
+        mkdir test
+        cd test
         npm i loh
         yarn add loh
         yarn global add loh
