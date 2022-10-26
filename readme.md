@@ -24,4 +24,5 @@ You can easily rerun previous commands, such as fetch without re-inputting the o
 ```
 $ loh rerun 
 # This will run the previous command in the background without having you to retype them
+
 ``
