@@ -35,3 +35,5 @@ jobs:
         node index.js help 
         node index.js version
         npx loh
+        loh fetch -u https://example.com -r 20 -w 2000
+        node index.js fetch -u https://example.com -r 20 -w 2000
