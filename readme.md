@@ -69,3 +69,23 @@ This is a response body
 ```
 
 
+## Proxy
+### Set proxy
+```
+$ loh proxy --url https://proxy.example.com
+```
+### Delete proxy
+```
+$ loh peoxy --url https://proxy.example.com --remove
+```
+### View the list of proxies
+```
+$ loh proxy
+```
+### Use proxy in a request
+```
+$ loh fetch -u https://example.com --proxy
+```
+
+
+
