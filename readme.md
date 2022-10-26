@@ -78,7 +78,7 @@ $ loh fetch --url https://example.com -p
 ```
 $ loh proxy '{"proxy":{"host":"proxy-url","port":80,"auth":{"username":"my-user","password":"my-password"}}'
 ```
-### Remove proxy 
+#### Remove proxy 
 ```
 $ loh proxy --remove
 ```
