@@ -4,8 +4,8 @@
   <a href="https://npmjs.com/loh"><img src="https://badge.fury.io/js/loh.svg"></a>
   
   <h2>Installation</h2>
-<code>
+<pre>
 npm install -g loh # or using yarn: yarn global add loh
-  </code>
+  </pre>
 </div>
 
