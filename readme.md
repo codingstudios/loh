@@ -70,15 +70,15 @@ This is a response body
 
 
 ## Proxy
-### Set proxy
+#### Set proxy
 ```
 $ loh proxy --url https://proxy.example.com
 ```
-### Delete proxy
+#### Delete proxy
 ```
 $ loh peoxy --url https://proxy.example.com --remove
 ```
-### View the list of proxies
+#### View the list of proxies
 ```
 $ loh proxy
 ```
