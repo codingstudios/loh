@@ -1,10 +1,10 @@
-<div align="center">
-  <h1>loh</h1>
-  <p>Make http request on cli with ease</p>
-  <a href="https://npmjs.com/loh"><img src="https://badge.fury.io/js/loh.svg"></a>
+# loh
+Make http request on cli with ease
+<a href="https://npmjs.com/loh"><img src="https://badge.fury.io/js/loh.svg"></a>
   
-  <h3>Installation</h3>
-<pre>npm: npm install -g loh 
-yarn: yarn global add loh</pre>
-</div>
+## Installation
 
+```bash
+npm: npm install -g loh 
+yarn: yarn global add loh
+```
