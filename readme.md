@@ -68,6 +68,20 @@ This is a response body
 [{"timingEnd":1666711647530,"timingStart":1666711647117,"elapsedTime":413}]
 ```
 
+## Proxy
+Use a proxy server
+### Use proxy server to do a request
+```
+$ loh fetch --url https://example.com -p
+```
+#### Set a proxy server
+```
+$ loh proxy '{"proxy":{"host":"proxy-url","port":80,"auth":{"username":"my-user","password":"my-password"}}'
+```
+### Remove proxy 
+```
+$ loh proxy --remove
+```
 
 ## Relay
 loh supports [relay-server](https://github.com/codingstudios/Fetch-Relay/tree/main/relayServer)
