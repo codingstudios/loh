@@ -73,19 +73,19 @@ This is a response body
 loh supports [relay-server](https://github.com/codingstudios/Fetch-Relay/tree/main/relayServer)
 ### Use relay in a request
 ```
-$ loh fetch -u https://example.com --proxy
+$ loh fetch -u https://example.com --relay
 ```
 #### Set relay
 ```
-$ loh proxy --url https://proxy.example.com
+$ loh relay --url https://proxy.example.com
 ```
 #### Delete relay
 ```
-$ loh proxy --url https://proxy.example.com --remove
+$ loh relay --url https://proxy.example.com --remove
 ```
 #### View the list of relays
 ```
-$ loh proxy
+$ loh relay
 ```
 
 
