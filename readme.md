@@ -102,6 +102,11 @@ $ loh relay --url https://proxy.example.com --remove
 $ loh relay
 ```
 
+## Contributors
+- [@leecheeyong](https://github.com/leecheeyong)
+- [@joeleeofficial](https://github.com/joeleeofficial)
+
+
 ## License
 
 This project is available as open source under the terms of the [AGPL-3.0 License](https://github.com/codingstudios/loh/blob/main/LICENSE)
