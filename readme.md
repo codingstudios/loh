@@ -38,7 +38,7 @@ $ loh fetch -u https://example.com --repeat 10 -wait 2000 # Do a total of 11 fet
 ```
 
 ### Set Headers
-Set a JSON header for a request
+Set a JSON header 
 ```
 $ loh fetch -u https://example.com --headers '{"Authorization":"123456"}' --method POST
 ```
@@ -47,6 +47,18 @@ $ loh fetch -u https://example.com --headers '{"Authorization":"123456"}' --meth
 Set the request body as text or JSON 
 ```
 $ loh fetch -u https://example.com --body '{"value":"hello"}' --method POST
+```
+
+### Set User Agent
+Set the user agent (**Note: a random user agent will be generated and used automatically**)
+```
+$ loh fetch -u https://example.com --useragent loh
+```
+
+### Set Output
+Set a file to save output
+```
+$ loh fetch -u https://example.com --output ./output.txt
 ```
 
 
