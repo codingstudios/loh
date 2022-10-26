@@ -104,12 +104,12 @@ args.forEach((e, i) => {
 }
 
 getArgs();
-
 if(command == "rr" || command == "rerun") {
     if(!log?.command || log?.command == "rr") error("No command to rerun"); 
     else { args = log.args; getArgs(); commands[log?.command](); }
 }else {
-    if(!commands[`${command}`]) error("Command not found");
+    if(!command) help()
+    else if(command && !commands[`${command}`]) error("Command not found");
     else { commands[`${command}`](); fs.writeFileSync('./config.json', JSON.stringify({ ...config, log: { url, method, useRelay, useProxy, data, output, command, args, type, userAgent, headers } })); }
 }
 
