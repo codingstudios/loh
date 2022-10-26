@@ -69,23 +69,25 @@ This is a response body
 ```
 
 
-## Proxy
-#### Set proxy
-```
-$ loh proxy --url https://proxy.example.com
-```
-#### Delete proxy
-```
-$ loh peoxy --url https://proxy.example.com --remove
-```
-#### View the list of proxies
-```
-$ loh proxy
-```
-### Use proxy in a request
+## Relay
+loh supports [relay-server](https://github.com/codingstudios/Fetch-Relay/tree/main/relayServer)
+### Use relay in a request
 ```
 $ loh fetch -u https://example.com --proxy
 ```
+#### Set relay
+```
+$ loh proxy --url https://proxy.example.com
+```
+#### Delete relay
+```
+$ loh proxy --url https://proxy.example.com --remove
+```
+#### View the list of relays
+```
+$ loh proxy
+```
+
 
 
 
