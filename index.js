@@ -20,7 +20,7 @@ var config = {
     proxy: {}
 };
 if(fs.existsSync("./config.json")) config = JSON.parse(fs.readFileSync('./config.json', 'utf-8'));
-else fs.writeFileSync('./config.json', JSON.stringify(log));
+else fs.writeFileSync('./config.json', JSON.stringify(config));
 var log = config?.log || {};
 var url;
 var method;
