@@ -25,10 +25,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: |
-        npm i -g loh
-        loh help
-        loh version 
-        loh fetch -u https://example.com
         node index.js fetch -u https://example.com
         node index.js help 
         node index.js version
