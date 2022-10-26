@@ -55,10 +55,17 @@ Set the user agent (**Note: a random user agent will be generated and used autom
 $ loh fetch -u https://example.com --useragent loh
 ```
 
-### Set Output
-Set a file to save output
+### Set Output & format data
+Set a file to save output data
 ```
 $ loh fetch -u https://example.com --output ./output.txt
+$ loh fetch -u https://example.com --output ./output.txt  --type 'status|data|timings'
+```
+Example output data of the second line:
+```
+200
+This is a response body
+[{"timingEnd":1666711647530,"timingStart":1666711647117,"elapsedTime":413}]
 ```
 
 
