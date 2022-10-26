@@ -28,7 +28,6 @@ jobs:
         node index.js fetch -u https://example.com -r 20 -w 2000
         mkdir test
         cd test
-        npm i loh
         yarn add loh
         yarn global add loh
         npm i -g loh@latest
@@ -36,3 +35,4 @@ jobs:
         loh help
         loh version
         loh fetch -u https://example.com -r 20 -w 2000
+        npx loh
