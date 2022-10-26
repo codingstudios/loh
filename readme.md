@@ -36,3 +36,17 @@ You can easily do a same fetch request multiple times with the option to set a d
 $ loh fetch -u https://example.com --repeat 10 # Do a fetch request 11 times (repeat the same fetch 10 times)
 $ loh fetch -u https://example.com --repeat 10 -wait 2000 # Do a total of 11 fetch request with 2000 milliseconds of delay each
 ```
+
+### Set Headers
+Set a JSON header for a request
+```
+$ loh fetch -u https://example.com --headers '{"Authorization":"123456"}' --method POST
+```
+
+### Set body
+Set the request body as text or JSON 
+```
+$ loh fetch -u https://example.com --body '{"value":"hello"}' --method POST
+```
+
+
