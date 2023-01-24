@@ -4,6 +4,7 @@
 import fs from 'fs';
 import chalk from 'chalk';
 import axios from 'axios';
+import minimist from 'minimist';
 import resTime from './resTime.js';
 import UserAgent from 'user-agents';
 import { parse, stringify, toJSON } from 'flatted';
@@ -12,8 +13,9 @@ const UA = new UserAgent();
 
 resTime(axios);
 
-const command = process.argv[2];
-var args = process.argv.slice(3) || [];
+const args = minimist(process.argv.slice(2));
+console.log(args)
+const command = args?._;
 var config = {
     relays: [],
     log: {},
@@ -39,68 +41,62 @@ const commands = {
     fetch, relay, version, ["-v"]: version, ["--version"]: version, help, ["-h"]: help, ["--help"]: help, proxy
 };
 
-function getArgsData(type, arg) {
-    if(arg.length == 0) return log[`${type}`];
-    else return arg;
-}
-
 function getArgs() {
-if(!args || args.length == 0) return;
-args.forEach((e, i) => {
-    switch(e) {
-        case "-u":
-        case "--url":
-            url = getArgsData("url", args[i+1]);
+for(var i in args) {
+    switch(i) {
+        case "u":
+        case "url":
+            url = args[i];
         break;
-        case "-m":
-        case "--method":
-            method = getArgsData("method", args[i+1]);
+        case "m":
+        case "method":
+            method = args[i];
         break;
-        case "-d":
-        case "--data":
-            data = getArgsData("data", args[i+1]);
+        case "d":
+        case "data":
+            data = args[i];
         break;
-        case "-o":
-        case "--output":
-            output = getArgsData("output", args[i+1]);
+        case "o":
+        case "output":
+            output = args[i];
         break;
-        case "-t":
-        case "--type":
-            type = getArgsData("type", args[i+1]);
+        case "t":
+        case "type":
+            type = args[i];
         break;
-        case "-r":
-        case "--repeat":
-        if(isNaN(Number(args[i+1]))) return error("Invalid repeat value", args[i+1], '-r or --repeat <number>');
-            repeat = getArgsData("repeat", args[i+1]);
+        case "r":
+        case "repeat":
+        if(isNaN(Number(args[i]))) return error("Invalid repeat value", args[i], '-r or --repeat <number>');
+            repeat = args[i];
         break;
-        case "-w":
-        case "--wait":
-        if(isNaN(Number(args[i+1]))) return error("Invalid wait value", args[i+1], '-w or --wait <number>');
-            wait = getArgsData("wait", args[i+1]);
+        case "w":
+        case "wait":
+        if(isNaN(Number(args[i]))) return error("Invalid wait value", args[i], '-w or --wait <number>');
+            wait = args[i];
         break;
-        case "-re":
-        case "--relay":
+        case "re":
+        case "relay":
             useRelay = true;
         break;
-        case "-rm":
-        case "--remove":
+        case "rm":
+        case "remove":
             remove = true;
         break;
-        case "-H":
-        case "--headers":
-            headers = getArgsData("headers", args[i+1]);
+        case "H":
+        case "headers":
+            headers = args[i];
         break;
-        case "-ua":
-        case "--useragent":
-            userAgent = getArgsData("useragent", args[i+1]);
+        case "ua":
+        case "useragent":
+            userAgent = gargs[i];
         break;
-        case "-p":
-        case "--proxy":
+        case "p":
+        case "proxy":
             if(!config?.proxy) return error("No proxy was found", "PROXY", `${chalk.green(`loh proxy`)}`);
             useProxy = config?.proxy;
         break;
     }
-})
+}
 }
 
 getArgs();
@@ -172,7 +168,7 @@ function fetch() {
          }
         return fetchError(`${useRelay ? `${chalk.yellow(`Relay used: ${packet.url}`)} ` : ''}
         ${err}
-        ${err.response.data ? chalk.grey(err.response.data.substring(0, 100)) : 'No response data'}
+        ${err?.response?.data ? chalk.grey(err?.response?.data?.substring(0, 100)) : 'No response data'}
 `);
     })
 }
