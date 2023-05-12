@@ -61,13 +61,13 @@ for(var option in args) {
 
         case "r":
         case "repeat":
-            if(isNaN(Number(args[option]))) return error("Invalid repeat value:", args[option], '[-r or --repeat <number>]');
+            if(isNaN(Number(args[option]))) error("Invalid repeat value:", args[option], '[-r or --repeat <number>]');
             config.repeat = args[option];
         break;
 
         case "w":
         case "wait":
-        if(isNaN(Number(args[i]))) return error("Invalid wait value:", args[option], '[-w or --wait <milliseconds>]');
+        if(isNaN(Number(args[i]))) error("Invalid wait value:", args[option], '[-w or --wait <milliseconds>]');
             config.wait = args[option];
         break;
 
@@ -83,7 +83,7 @@ for(var option in args) {
 
         case "p":
         case "proxy":
-            var value = (args[option]).split("@");
+            var value = args[option]?.split(":");
             var user = value.length =! 1 ? value[0] : null;
             var proxy = (value.length > 1 ? value[1] : value[0]).split(":");
             if(user) user = {
@@ -99,3 +99,5 @@ for(var option in args) {
         
     }
 }
+
+console.log(config)
