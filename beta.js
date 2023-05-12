@@ -75,14 +75,26 @@ for(var option in args) {
         case "headers":
             config.headers = args[option];
         break;
+
         case "ua":
         case "useragent":
             config.userAgent = args[option];
+        break;
 
         case "p":
         case "proxy":
-            if(!config?.proxy) return error("No proxy was found", "PROXY", `${chalk.green(`loh proxy`)}`);
-            config.proxy = args[option];
+            var value = (args[option]).split("@");
+            var user = value.length =! 1 ? value[0] : null;
+            var proxy = (value.length > 1 ? value[1] : value[0]).split(":");
+            if(user) user = {
+                username: user.split(":")[0],
+                password: user.split(":")[1]
+            };
+            config.proxy = {
+                host: proxy[0], 
+                port: proxy[1],
+                user
+            }
         break;
         
     }
