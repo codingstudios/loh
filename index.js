@@ -88,7 +88,7 @@ for(var i in args) {
         break;
         case "ua":
         case "useragent":
-            userAgent = gargs[i];
+            userAgent = args[i];
         break;
         case "p":
         case "proxy":
@@ -270,7 +270,7 @@ console.log(`
     -t, --type        Type of data to output
     -o, --output      Output file to save data
     -m, --method      Method to use
-    -re, --relay       Use relay
+    -re, --relay      Use relay
     -rm, --remove     Remove 
     -d, --data        Body of the request
     -H, --headers     Headers of the request
