@@ -1,1 +1,1 @@
-{"relays":[],"log":{"useRelay":false,"command":["help"],"args":{"_":["help"]}},"proxy":{}}
+{"relays":[],"log":{"url":"https://google.com","useRelay":false,"command":["fetch"],"args":{"_":["fetch"],"url":"https://google.com"}},"proxy":{}}

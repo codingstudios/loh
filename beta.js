@@ -12,63 +12,64 @@ const UA = new UserAgent();
 
 
 import { help, version } from './modules/info.js';
+import { fetch } from './modules/fetch.js';
 
 resTime(axios);
 
 const args = minimist(process.argv.slice(2));
 const command = args?._;
 
-var config = {};
-
-if(command == "help" || args.help) help({
-    command, logo, chalk
-});
-if(command == "version" || args.v) version({
-    axios, logo, chalk
-});
+var config = {
+    method: "GET",
+    repeat: 1
+};
 
 for(var option in args) {
     switch(option) {
-        case "u":
+        case "u": 
         case "url": 
-            config.url = args[option];
+            config.url = args[option]; // url to request
         break;
         
         case "m":
         case "method":
-            config.method = args[option];
+            config.method = args[option]; // request method
         break;
 
         case "o":
         case "output":
-            config.output = args[option];
+            config.output = args[option]; // output file
         break;
 
         case "d":
         case "display":
-            config.display = true;
+            config.display = true; // display portion data
         break;
 
         case "r":
         case "repeat":
             if(isNaN(Number(args[option]))) error("Invalid repeat value:", args[option], '[-r or --repeat <number>]');
-            config.repeat = Number(args[option]);
+            config.repeat = Number(args[option]); // repeat request
         break;
 
         case "w":
         case "wait":
         if(isNaN(Number(args[option]))) error("Invalid wait value:", args[option], '[-w or --wait <milliseconds>]');
-            config.wait = Number(args[option]);
+            config.wait = Number(args[option]); // wait before request
         break;
 
         case "H":
         case "headers":
-            config.headers = JSON.parse(args[option]);
+            config.headers = JSON.parse(args[option]); // request header
         break;
+
+        case "b":
+        case "body":
+            config.body = args[option] // request body
 
         case "ua":
         case "useragent":
-            config.userAgent = args[option];
+            config.userAgent = args[option]; // request user agent
         break;
 
         case "p":
@@ -80,7 +81,7 @@ for(var option in args) {
                 username: user.split(":")[0],
                 password: user.split(":")[1]
             };
-            config.proxy = {
+            config.proxy = { // request proxy
                 host: proxy[0], 
                 port: proxy[1],
                 user
@@ -91,3 +92,13 @@ for(var option in args) {
 }
 
 console.log(config)
+
+if(command == "help" || args.help) help({
+    command, logo, chalk
+});
+if(command == "version" || args.version) version({
+    axios, logo, chalk
+});
+if(command == "fetch" || args.fetch) fetch({
+    axios, chalk, config, UA, error
+});

@@ -26,6 +26,6 @@
     "chalk": "^5.2.0",
     "flatted": "^3.2.7",
     "minimist": "^1.2.8",
-    "user-agents": "^1.0.1377"
+    "user-agents": "^1.0.1378"
   }
 }
