@@ -83,9 +83,9 @@ for(var option in args) {
 
         case "p":
         case "proxy":
-            var value = args[option]?.split(":");
-            var user = value.length =! 1 ? value[0] : null;
-            var proxy = (value.length > 1 ? value[1] : value[0]).split(":");
+            var value = (args[option]).split("@");
+            var user = value.length == 2 ? value[0] : null;
+            var proxy = (value.length == 1 ? value[0] : value[1]).split(":");
             if(user) user = {
                 username: user.split(":")[0],
                 password: user.split(":")[1]
