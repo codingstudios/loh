@@ -11,7 +11,7 @@ import { logo, error } from './modules/utils.js';
 const UA = new UserAgent();
 
 
-import help from './modules/help.js';
+import { help, version } from './modules/info.js';
 
 resTime(axios);
 
@@ -22,6 +22,9 @@ var config = {};
 
 if(command == "help" || args.help) help({
     command, logo, chalk
+});
+if(command == "version" || args.v) version({
+    axios, logo, chalk
 });
 
 for(var option in args) {
