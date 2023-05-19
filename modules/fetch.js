@@ -1,3 +1,6 @@
+import { SocksProxyAgent } from 'socks-proxy-agent';
+import { parse, stringify, toJSON } from 'flatted';
+
 export const fetch = ({ axios, chalk, config , UA, error }) => {
     const fetchError = (message, showExample = true) => error(message, "FETCH", showExample ? `${chalk.green(`loh fetch`)} <url:required> <method> <data> <output> <type> <repeat> <wait> <relay>` : null);
     var { url, method, output, display, repeat, wait, headers = {}, body, userAgent, proxy } = config;
@@ -11,13 +14,13 @@ export const fetch = ({ axios, chalk, config , UA, error }) => {
         headers["User-Agent"] = ua;
     }
     const packet = {
-        url, method, headers, proxy, data: body
+        url, method, headers, data: body, proxy
     };
-    
     function runFetch() {
         axios(packet).then(response => {
         console.log(`    ${chalk.green(`Status Code:`)} ${chalk.green.bold(response.status)}`)
-            const data = response.data;
+            const data = JSON.stringify(response.data);
+        console.log(chalk.dim(`    ${data.length > 50 ? `${data.slice(1,50)}...` : `${data}`}`))
         })
     }
     Array.from({length: repeat}, () => runFetch());
