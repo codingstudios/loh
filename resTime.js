@@ -38,3 +38,4 @@ const calcElapsedTime = (timingStart, timingEnd) => {
 
     return;
 };
+

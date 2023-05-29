@@ -72,6 +72,11 @@ for(var option in args) {
             config.userAgent = args[option]; // request user agent
         break;
 
+        case "t":
+        case "timeout":
+            config.timeout = args[option]; // request timeout in milliseconds
+        break;
+
         case "p":
         case "proxy":
             var value = (args[option]).split("@");
