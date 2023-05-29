@@ -67,7 +67,6 @@ for(var option in args) {
         case "body":
             config.body = args[option] // request body
 
-        case "ua":
         case "useragent":
             config.userAgent = args[option]; // request user agent
         break;

@@ -11,9 +11,13 @@ export const fetch = ({ axios, chalk, config , UA, error }) => {
         console.log(`
     ${chalk.green("User Agent:")} ${chalk.yellow.bold(`Random`)} ${chalk.dim(`(${ua})`)}`);
         headers["User-Agent"] = ua;
+    }else {
+        console.log(`
+    ${chalk.green("User Agent:")} ${chalk.yellow.bold(`Custom`)} ${chalk.dim(`(${userAgent})`)}`);
+        headers["User-Agent"] = userAgent;
     }
     const packet = {
-        url, method, headers, data: body, proxy, timeout: null
+        url, method, headers, data: body, proxy, timeout
     };
     function runFetch() {
         axios(packet).then(response => {
