@@ -1,9 +1,13 @@
 export const help = ({ logo, chalk }) => {
-    console.log(`
+  console.log(`
     ${logo()}
     Github: ${chalk.yellow(`https://github.com/CodingStudios/loh`)}
-    Author: ${chalk.green(`https://github.com/leecheeyong`)} & ${chalk.green(`https://github.com/joeleeofficial`)}
-    License: ${chalk.blue(`AGPL-3.0 (https://github.com/CodingStudios/loh/blob/main/LICENSE)`)}
+    Author: ${chalk.green(`https://github.com/leecheeyong`)} & ${chalk.green(
+    `https://github.com/joeleeofficial`
+  )}
+    License: ${chalk.blue(
+      `AGPL-3.0 (https://github.com/CodingStudios/loh/blob/main/LICENSE)`
+    )}
 
 
     Commands:
@@ -29,21 +33,27 @@ export const help = ({ logo, chalk }) => {
     Usage: ${chalk.blue(`loh <command> [options]`)}
     Example: ${chalk.yellow(`loh fetch -u https://example.com -method GET`)}
 
-    `)
-}
+    `);
+};
 
 export const version = async ({ axios, chalk, logo }) => {
-    const { data } = await axios.get("https://raw.githubusercontent.com/codingstudios/loh/main/package.json");
-    console.log(`
+  const { data } = await axios.get(
+    "https://raw.githubusercontent.com/codingstudios/loh/main/package.json"
+  );
+  console.log(`
     ${logo()}
     --------------------
     Latest Version: ${chalk.green(`v${data.version}`)}
     --------------------
 
     Github: ${chalk.yellow(`https://github.com/CodingStudios/loh`)}
-    Author: ${chalk.green(`https://github.com/leecheeyong`)} & ${chalk.green(`https://github.com/joeleeofficial`)}
-    License: ${chalk.blue(`AGPL-3.0 (https://github.com/CodingStudios/loh/blob/main/LICENSE)`)}
+    Author: ${chalk.green(`https://github.com/leecheeyong`)} & ${chalk.green(
+    `https://github.com/joeleeofficial`
+  )}
+    License: ${chalk.blue(
+      `AGPL-3.0 (https://github.com/CodingStudios/loh/blob/main/LICENSE)`
+    )}
 
     ${chalk.grey(`Use ${chalk.green(`loh help`)} to view all commands`)}
-    `);   
-}
+    `);
+};
