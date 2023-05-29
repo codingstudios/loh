@@ -29,11 +29,17 @@ export const fetch = ({ axios, chalk, config , UA, error }) => {
         if(output) {
             fs.writeFileSync(`${repeat > 1 ? `(${rp}) ` : ''}${output}`, await prettier.format(stringify(response), { parser: "babel" }));
         }
+        if(display) {
+            console.log(`    ${chalk.green(`Content:`)}\n${response?.data.split("\n").map((line, index) => `    ${index == 0 ? '' : '    '}${line}`).join("\n")}`)
+        }
         }).catch(async err=> {
         if(err.response) {
         console.log(`    ${chalk.green(`Status Code:`)} ${chalk.red.bold(err.response.code)}`)
         const data = JSON.stringify(err.response.data);
         console.log(chalk.dim(`    ${data.length > 50 ? `${data.slice(1,50)}...` : `${data}`}`))
+        if(display) {
+            console.log(`    ${chalk.green(`Content:`)}\n${err?.response?.data?.split("\n").map((line, index) => `    ${index == 0 ? '' : '    '}${line}`).join("\n")}`)
+        }
         }else {
         console.log(`    ${chalk.green(`Status Code:`)} ${chalk.red.bold(err.code)} ${chalk.dim(`[Axios Error]`)}`)
         console.log(chalk.dim(`    ${err.message}`))
