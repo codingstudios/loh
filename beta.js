@@ -6,11 +6,14 @@ import axios from "axios";
 import minimist from "minimist";
 import resTime from "./resTime.js";
 import UserAgent from "user-agents";
+import netrc from './modules/netrc.js';
 import { logo, error } from "./modules/utils.js";
 const UA = new UserAgent();
+const storage = netrc.storage();
 
 import { help, version } from "./modules/info.js";
 import { fetch } from "./modules/fetch.js";
+import { addRelay, removeRelay } from "./modules/settings.js"
 
 resTime(axios);
 
@@ -20,6 +23,7 @@ const command = args?._;
 var config = {
   method: "GET",
   repeat: 1,
+  ...(storage['lohjs'] ? storage['lohjs'] : {})
 };
 
 for (var option in args) {
@@ -101,10 +105,15 @@ for (var option in args) {
         user,
       };
       break;
+
+      case "relay":
+        // if(!config?.relays || !Array.isArray(config?.relays) || !config?.relays[0]) error("No relays were found", "RELAY", `${chalk.green(`loh relay`)}`);
+        useRelay = config?.relays[Math.floor(Math.random()*config?.relays.length)];
+      break;
   }
 }
 
-console.log(config);
+console.log(args);
 
 if (command == "help" || args.help)
   help({
@@ -117,6 +126,7 @@ if (command == "version" || args.version)
     axios,
     logo,
     chalk,
+    storage
   });
 if (command == "fetch" || args.fetch)
   fetch({
@@ -125,4 +135,26 @@ if (command == "fetch" || args.fetch)
     config,
     UA,
     error,
+    storage
+  });
+if (args.addrelay)
+  addRelay({
+    axios,
+    chalk,
+    config,
+    error,
+    logo,
+    storage,
+    netrc,
+    args: args.addrelay
+  });
+if (args.addrelay)
+  removeRelay({
+    chalk,
+    config,
+    error,
+    logo,
+    storage,
+    netrc,
+    args: args.removerelay
   });
