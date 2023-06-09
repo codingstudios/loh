@@ -148,7 +148,7 @@ if (args.addrelay)
     netrc,
     args: args.addrelay
   });
-if (args.addrelay)
+if (args.removerelay)
   removeRelay({
     chalk,
     config,

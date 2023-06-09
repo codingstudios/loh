@@ -1,9 +1,10 @@
 export const addRelay = ({ axios, chalk, error, storage, logo, args, netrc }) => {
     console.log(`
     ${logo()}
-    ${chalk.green("Relays Count:")} ${chalk.yellow.bold(storage['lohjs']?.relays[0] || "None")}
+    ${chalk.green("Relays Count:")} ${chalk.yellow.bold(storage['lohjs'].relays && storage['lohjs']?.relays.length || "None")}
     ${typeof args != 'string' ? `Run ${chalk.dim(`loh --setrelay <url@password>`)} to add a relay` : ""}
     `)
+    if(typeof args != 'string') return;
     const [url, password] = args.split("@");
     return axios({
         url,
@@ -20,7 +21,7 @@ export const addRelay = ({ axios, chalk, error, storage, logo, args, netrc }) =>
         storage['lohjs'].relays.push(args);
         netrc.save(storage);
         console.log(`
-        ${chalk.green("Relay added successfully:")} ${chalk.yellow.bold(args)}
+    ${chalk.green("Relay added successfully:")} ${chalk.yellow.bold(args)}
         `)
     }).catch((err) => {
         console.log(err)
