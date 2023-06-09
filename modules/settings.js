@@ -18,13 +18,12 @@ export const addRelay = ({ axios, chalk, error, storage, logo, args, netrc }) =>
         if(!storage['lohjs']) storage['lohjs'] = {};
         if(!storage['lohjs']?.relays) storage['lohjs'].relays = [];
         storage['lohjs'].relays.push(args);
-     //   netrc.save(storage);
-     console.log(netrc())
+        netrc.save(storage);
         console.log(`
         ${chalk.green("Relay added successfully:")} ${chalk.yellow.bold(args)}
         `)
     }).catch((err) => {
-        console.log(err.message)
+        console.log(err)
     })
 }
 

@@ -6,10 +6,10 @@ import axios from "axios";
 import minimist from "minimist";
 import resTime from "./resTime.js";
 import UserAgent from "user-agents";
-import netrc from './modules/netrc.js';
+import netrc from 'netrc';
 import { logo, error } from "./modules/utils.js";
 const UA = new UserAgent();
-const storage = netrc.storage();
+const storage = netrc();
 
 import { help, version } from "./modules/info.js";
 import { fetch } from "./modules/fetch.js";
