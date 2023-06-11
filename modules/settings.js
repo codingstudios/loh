@@ -50,7 +50,7 @@ export const listRelays = ({ chalk, logo, storage }) => {
     console.log(`
     ${logo()}
     ${chalk.green("Relays Count:")} ${chalk.yellow.bold(storageData?.relays && storageData?.relays.length || "None")}
-    ${storageData?.relays && storageData?.relays.map((relay, index) => `
-    ${chalk.green(index + 1+'.')} ${chalk.yellow.bold(relay)}`).join("")}
+    ${Array.isArray(storageData?.relays) ? storageData?.relays.map((relay, index) => `
+    ${chalk.green(index + 1+'.')} ${chalk.yellow.bold(relay)}`).join("") : ""}
     `)
 }
