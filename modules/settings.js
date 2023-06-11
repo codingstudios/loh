@@ -45,7 +45,12 @@ export const removeRelay = ({ chalk, config, error, storage, args }) => {
     }
 }
 
-export const showRelays = ({ chalk, config, error, storage }) => {
-    
-
+export const listRelays = ({ chalk, logo, storage }) => {
+    const storageData = storage.get();
+    console.log(`
+    ${logo()}
+    ${chalk.green("Relays Count:")} ${chalk.yellow.bold(storageData?.relays && storageData?.relays.length || "None")}
+    ${storageData?.relays && storageData?.relays.map((relay, index) => `
+    ${chalk.green(index + 1+'.')} ${chalk.yellow.bold(relay)}`).join("")}
+    `)
 }

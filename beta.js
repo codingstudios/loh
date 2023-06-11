@@ -13,7 +13,7 @@ const storage = new Storage();
 
 import { help, version } from "./modules/info.js";
 import { fetch } from "./modules/fetch.js";
-import { addRelay, removeRelay } from "./modules/settings.js"
+import { addRelay, removeRelay, listRelays } from "./modules/settings.js"
 
 resTime(axios);
 
@@ -156,3 +156,9 @@ if (args.removerelay)
     storage,
     args: args.removerelay
   });
+if(args.listrelays)
+  listRelays({
+    chalk,
+    logo,
+    storage
+  })
