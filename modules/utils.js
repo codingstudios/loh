@@ -25,5 +25,5 @@ export const error = (message, error, example, kill) => {
     ${example ? chalk.blue(`Example: ${example}`) : ""}
 `)
   );
-  if(kill) process.exit(1);
+  if (kill) process.exit(1);
 };

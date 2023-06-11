@@ -25,7 +25,7 @@ export const fetch = ({ axios, chalk, config, UA, error }) => {
     userAgent,
     proxy,
     timeout,
-    useRelay
+    useRelay,
   } = config;
   if (!url) return fetchError("URL not provided");
   if (!method) return fetchError("Unknown request method");
@@ -44,28 +44,33 @@ export const fetch = ({ axios, chalk, config, UA, error }) => {
     )}`);
     headers["User-Agent"] = userAgent;
   }
-  if(useRelay) {
-    console.log(`    ${chalk.blue.bold("Using Relay")} ${chalk.dim(
-      `(${useRelay.url})`
-    )}`);
+  if (useRelay) {
+    console.log(
+      `    ${chalk.blue.bold("Using Relay")} ${chalk.dim(`(${useRelay.url})`)}`
+    );
   }
   const packet = {
     url,
     method,
     headers,
-    data: body
+    data: body,
   };
-  
+
   function runFetch(rp) {
-    axios({ 
-      ...(useRelay ? {
-      url: useRelay.url,
-      method: "POST",
-      data: {
-        password: useRelay.password,
-        ...packet
-      }
-    } : packet), proxy, timeout })
+    axios({
+      ...(useRelay
+        ? {
+            url: useRelay.url,
+            method: "POST",
+            data: {
+              password: useRelay.password,
+              ...packet,
+            },
+          }
+        : packet),
+      proxy,
+      timeout,
+    })
       .then(async (response) => {
         console.log(
           `    ${chalk.green(`Status Code:`)} ${chalk.green.bold(
