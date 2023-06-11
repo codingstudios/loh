@@ -24,9 +24,9 @@ export default class Storage {
         return this.storage;
     }
 
-    set(storage) {
+    async set(storage) {
         this.storage = storage;
-        this.save();
+        await this.save();
     }
 
 }

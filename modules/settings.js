@@ -1,5 +1,6 @@
 export const addRelay = ({ axios, chalk, error, logo, args, storage }) => {
     var storageData = storage.get();
+    args = args.addrelay;
     console.log(`
     ${logo()}
     ${chalk.green("Relays Count:")} ${chalk.yellow.bold(storageData?.relays && storageData?.relays.length || "None")}
@@ -19,7 +20,7 @@ export const addRelay = ({ axios, chalk, error, logo, args, storage }) => {
         if(!storageData?.relays) storageData.relays = [];
         storageData.relays.push(args);
         storageData.relays = [...new Set(storageData.relays)];
-        storage.save(storageData).then(() => 
+        storage.save().then(() => 
         console.log(`    ${chalk.green("Relay added successfully:")} ${chalk.yellow.bold(args)}
         `));
         
@@ -29,18 +30,18 @@ export const addRelay = ({ axios, chalk, error, logo, args, storage }) => {
 }
 
 
-export const removeRelay = ({ chalk, config, error, storage, args }) => {
-    if(typeof args != 'string') console.log(`
+export const removeRelay = ({ chalk, error, storage, args }) => {
+    if(typeof args?.removerelay != 'string') console.log(`
     Run ${chalk.dim(`loh --removerelay <url>`)} to remove a relay
     `)
     const storageData = storage.get();
-    if(!Array.isArray(storageData?.relays) || !storageData?.relays.find((relay) => relay.startsWith(args))) {
+    if(!Array.isArray(storageData?.relays) || !storageData?.relays.find((relay) => relay.startsWith(args.removerelay))) {
     return error("No relay found", `RELAY`, `${chalk.green(`loh --removerelay <url>`)}`)
     }else {
-    storageData.relays.splice(storageData.relays.indexOf(storageData.relays.find((relay) => relay.startsWith(args))), 1);
-    storage.save(storageData).then(() => 
+    storageData.relays.splice(storageData.relays.indexOf(storageData.relays.find((relay) => relay.startsWith(args.removerelay))), 1);
+    storage.save().then(() => 
     console.log(`    
-    ${chalk.green("Relay removed successfully:")} ${chalk.yellow.bold(args)}
+    ${chalk.green("Relay removed successfully:")} ${chalk.yellow.bold(args.removerelay)}
     `));
     }
 }

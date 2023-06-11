@@ -3,7 +3,6 @@ export const help = ({ logo, chalk }) => {
     ${logo()}
     Github: ${chalk.yellow(`https://github.com/CodingStudios/loh`)}
     Author: ${chalk.green(`https://github.com/leecheeyong`)}
-  )}
     License: ${chalk.blue(
       `AGPL-3.0 (https://github.com/CodingStudios/loh/blob/main/LICENSE)`
     )}

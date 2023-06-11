@@ -16,7 +16,7 @@ export const logo = () => {
     .join(`${["$", "=", "/"][Math.floor(Math.random() * 3)]}`);
 };
 
-export const error = (message, error, example) => {
+export const error = (message, error, example, kill) => {
   console.log(
     chalk.red(`
     ${message ? chalk.magenta(`loh error: ${error}`) : ""}
@@ -25,4 +25,5 @@ export const error = (message, error, example) => {
     ${example ? chalk.blue(`Example: ${example}`) : ""}
 `)
   );
+  if(kill) process.exit(1);
 };

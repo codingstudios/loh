@@ -6,26 +6,28 @@ import axios from "axios";
 import minimist from "minimist";
 import resTime from "./resTime.js";
 import UserAgent from "user-agents";
-import Storage from './modules/storage.js';
+import Storage from "./modules/storage.js";
 import { logo, error } from "./modules/utils.js";
 const UA = new UserAgent();
 const storage = new Storage();
 
 import { help, version } from "./modules/info.js";
 import { fetch } from "./modules/fetch.js";
-import { addRelay, removeRelay, listRelays } from "./modules/settings.js"
+import { addRelay, removeRelay, listRelays } from "./modules/settings.js";
 
 resTime(axios);
 
-const args = minimist(process.argv.slice(2));
+var args = minimist(process.argv.slice(2));
 const command = args?._;
 
 var config = {
   method: "GET",
   repeat: 1,
-  ...storage.get()
+  history: {},
+  ...storage.get(),
 };
 
+function processArgs() {
 for (var option in args) {
   switch (option) {
     case "u":
@@ -106,69 +108,90 @@ for (var option in args) {
       };
       break;
 
-      case "relay":
-        if(!config?.relays || !Array.isArray(config?.relays) || !config?.relays[0]) {
-           error("No relays were found therefore can't be used", "FETCH", `${chalk.green(`loh --listrelays`)}`);
-           process.exit(1);
-        }
-        const random = (config?.relays[Math.floor(Math.random()*config?.relays.length)]).split("@");
-        config.useRelay = {
-          url: random[0],
-          password: random[1] ? random[1] : null
-        }
+    case "relay":
+      if (
+        !config?.relays ||
+        !Array.isArray(config?.relays) ||
+        !config?.relays[0]
+      )
+        error(
+          "No relays were found therefore can't be used",
+          "FETCH",
+          `${chalk.green(`loh --listrelays`)}`,
+          true
+        );
+      const random =
+        (config?.relays[
+          Math.floor(Math.random() * config?.relays.length)
+        ]).split("@");
+      config.useRelay = {
+        url: random[0],
+        password: random[1] ? random[1] : null,
+      };
       break;
   }
 }
+}
 
-console.log(args);
+const commands = {
+  help,
+  version,
+  fetch,
+  addRelay,
+  removeRelay,
+  listRelays,
+};
 
-if (command == "help" || args.help)
-  help({
+(async () => {
+if (command == "rr" || command == "rerun") {
+  const { history } = storage.get();
+  if (!history?.command)
+    error(
+      "There are no previous command to be rerun",
+      "lohjs",
+      "lohjs <command>",
+      true
+    );
+  args = {
+    ...history?.args,
+    ...args
+  };
+  processArgs();
+  runCommand(history?.command);
+} else {
+  var storageData = storage.get();
+  storageData = {
+    ...storageData,
+    history: {
+      command,
+      args
+    }
+  };
+  await storage.set(storageData);
+  processArgs();
+  if (command == "help" || args.help) runCommand("help");
+  if (command == "version" || args.version) runCommand("version");
+  if (command == "fetch" || args.fetch) runCommand("fetch");
+  if (args.addrelay) runCommand("addRelay");
+  if (args.removerelay) runCommand("removeRelay");
+  if (args.listrelays) runCommand("listRelays");
+}
+})();
+function runCommand(command) {
+  if (!commands[command])
+    error("Invalid command:", command, "lohjs <command>", true);
+  commands[command]({
     command,
-    logo,
     chalk,
-  });
-if (command == "version" || args.version)
-  version({
     axios,
     logo,
-    chalk,
-    storage
-  });
-if (command == "fetch" || args.fetch)
-  fetch({
-    axios,
-    chalk,
+    storage,
     config,
     UA,
     error,
-    storage
+    args,
   });
-if (args.addrelay)
-  addRelay({
-    axios,
-    chalk,
-    config,
-    error,
-    logo,
-    storage,
-    args: args.addrelay
-  });
-if (args.removerelay)
-  removeRelay({
-    chalk,
-    config,
-    error,
-    logo,
-    storage,
-    args: args.removerelay
-  });
-if(args.listrelays)
-  listRelays({
-    chalk,
-    logo,
-    storage
-  })
+}
 
 /*
     APG-3.0 License: https://github.com/codingstudios/loh/blob/main/LICENSE
