@@ -29,9 +29,23 @@ export const addRelay = ({ axios, chalk, error, logo, args, storage }) => {
 }
 
 
-export const removeRelay = ({ chalk, config, error, storage, args, netrc }) => {
+export const removeRelay = ({ chalk, config, error, storage, args }) => {
     if(typeof args != 'string') console.log(`
     Run ${chalk.dim(`loh --removerelay <url>`)} to remove a relay
     `)
+    const storageData = storage.get();
+    if(!Array.isArray(storageData?.relays) || !storageData?.relays.find((relay) => relay.startsWith(args))) {
+    return error("No relay found", `RELAY`, `${chalk.green(`loh --removerelay <url>`)}`)
+    }else {
+    storageData.relays.splice(storageData.relays.indexOf(storageData.relays.find((relay) => relay.startsWith(args))), 1);
+    storage.save(storageData).then(() => 
+    console.log(`    
+    ${chalk.green("Relay removed successfully:")} ${chalk.yellow.bold(args)}
+    `));
+    }
+}
+
+export const showRelays = ({ chalk, config, error, storage }) => {
+    
 
 }
