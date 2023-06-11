@@ -23,7 +23,7 @@ const command = args?._;
 var config = {
   method: "GET",
   repeat: 1,
-  ...(storage['lohjs'] ? storage['lohjs'] : {})
+  ...storage.get()
 };
 
 for (var option in args) {
@@ -107,8 +107,15 @@ for (var option in args) {
       break;
 
       case "relay":
-        // if(!config?.relays || !Array.isArray(config?.relays) || !config?.relays[0]) error("No relays were found", "RELAY", `${chalk.green(`loh relay`)}`);
-        useRelay = config?.relays[Math.floor(Math.random()*config?.relays.length)];
+        if(!config?.relays || !Array.isArray(config?.relays) || !config?.relays[0]) {
+           error("No relays were found therefore can't be used", "FETCH", `${chalk.green(`loh --listrelays`)}`);
+           process.exit(1);
+        }
+        const random = (config?.relays[Math.floor(Math.random()*config?.relays.length)]).split("@");
+        config.useRelay = {
+          url: random[0],
+          password: random[1] ? random[1] : null
+        }
       break;
   }
 }
@@ -162,3 +169,8 @@ if(args.listrelays)
     logo,
     storage
   })
+
+/*
+    APG-3.0 License: https://github.com/codingstudios/loh/blob/main/LICENSE
+    Author: Lee Chee Yong
+*/
