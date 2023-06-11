@@ -53,19 +53,19 @@ export const fetch = ({ axios, chalk, config, UA, error }) => {
     url,
     method,
     headers,
-    data: body,
-    proxy,
-    timeout,
+    data: body
   };
+  
   function runFetch(rp) {
-    axios(useRelay ? {
+    axios({ 
+      ...(useRelay ? {
       url: useRelay.url,
       method: "POST",
       data: {
         password: useRelay.password,
         ...packet
       }
-    } : packet)
+    } : packet), proxy, timeout })
       .then(async (response) => {
         console.log(
           `    ${chalk.green(`Status Code:`)} ${chalk.green.bold(
