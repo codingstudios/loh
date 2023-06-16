@@ -9,6 +9,7 @@ Use package managers:
 ```bash
 npm install -g loh # npm
 yarn global add loh # yarn
+npx loh
 ```
 
 ## Usage
