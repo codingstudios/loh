@@ -9,7 +9,7 @@ Use package managers:
 ```bash
 npm install -g loh # npm
 yarn global add loh # yarn
-npx loh
+npx loh 
 ```
 
 ## Usage
@@ -20,99 +20,48 @@ You can do a fetch request using [axios](https://npmjs.com/axios) with ease
 $ loh fetch --url https://example.com
 ```
 
-### Re-run command with options
-You can easily rerun previous commands, such as fetch without re-inputting the options 
+### Re-run commands
+You can easily rerun previous commands (and make changes) 
 ```
 $ loh rerun 
-# This will run the previous command in the background without having you to retype them
 ```
 
-You can also see the list of available commands using the `loh help` command.
+Run `loh help` to see the list of available commands and options
 
 ## Options
 
-### Repeat & delay
-You can easily do a same fetch request multiple times with the option to set a delay for each request
+| **Option** | **Description** | **Example** |
+| ---------- | --------------- | ----------- |
+| `-u`, `--url` | Specify the url to make request to | `loh fetch -u https://example.com` |
+| `-m`, `--method` | Specify the request method | `loh fetch -u https://example.com -m POST` |
+| `-o`, `--output` | Specify a filename for response output | `loh fetch -u https://loh.js.org -o output.txt` |
+| `-d`, `--display` | Display some output data as preview | `loh fetch -u https://loh.js.org --display` |
+| `-r`, `--repeat` | Specify the amount of requests to make repeatedly | `loh fetch -u https://loh.js.org -r 5` |
+| `-w`, `--wait` | Specify the time to wait in (ms) before the next request is made | `loh fetch -u https://loh.js.org --wait 1000 -r 5` |
+| `-H`, `--headers` | Set the request header | `loh fetch -u https://loh.js.org --headers '{"Authorization": "Bearer 1234"}'` |
+| `-B`, `--body` | Set the request body | `loh fetch -u https://loh.js.org --method POST --body '{"value": "hello world"}'` |
+| `-p`, `--proxy` | Set the request proxy | `loh fetch -u https://loh.js.org --proxy user:password@127.0.0.1:9050` |
+| `--relay` | Use a random fetch relay to make the request | `loh fetch -u https://loh.js.org --relay` |
+
+## Configure Relays
+loh supports [Relay Server](https://github.com/codingstudios/relay-server)
 ```
-$ loh fetch -u https://example.com --repeat 10 # Do a fetch request 11 times (repeat the same fetch 10 times)
-$ loh fetch -u https://example.com --repeat 10 -wait 2000 # Do a total of 11 fetch request with 2000 milliseconds of delay each
+# add relay
+$ loh --addrelay https://relayserver.example
+
+# remove relay
+$ loh --removerelay https://relayserver.example
+
+# list relay
+$ loh --listrelays https://relayserver.example
 ```
 
-### Set Headers
-Set a JSON header 
-```
-$ loh fetch -u https://example.com --headers '{"Authorization":"123456"}' --method POST
-```
-
-### Set body
-Set the request body as text or JSON 
-```
-$ loh fetch -u https://example.com --body '{"value":"hello"}' --method POST
-```
-
-### Set User Agent
-Set the user agent (**Note: a random user agent will be generated and used automatically**)
-```
-$ loh fetch -u https://example.com --useragent loh
-```
-
-### Set Output & format data
-Set a file to save output data
-```
-$ loh fetch -u https://example.com --output ./output.txt
-$ loh fetch -u https://example.com --output ./output.txt  --type 'status|data|timings'
-```
-Example output data of the second line:
-```
-200
-This is a response body
-[{"timingEnd":1666711647530,"timingStart":1666711647117,"elapsedTime":413}]
-```
-
-## Proxy
-Use a proxy server
-### Use proxy server to do a request
-```
-$ loh fetch --url https://example.com -p
-```
-#### Set a proxy server
-```
-$ loh proxy '{"proxy":{"host":"proxy-url","port":80,"auth":{"username":"my-user","password":"my-password"}}'
-```
-#### Remove proxy 
-```
-$ loh proxy --remove
-```
-
-## Relay
-loh supports [relay-server](https://github.com/codingstudios/Fetch-Relay/tree/main/relayServer)
-### Use relay in a request
-```
-$ loh fetch -u https://example.com --relay
-```
-#### Set relay
-```
-$ loh relay --url https://proxy.example.com
-```
-#### Delete relay
-```
-$ loh relay --url https://proxy.example.com --remove
-```
-#### View the list of relays
-```
-$ loh relay
-```
 
 ## Contributors
 - [@leecheeyong](https://github.com/leecheeyong)
-- [@joeleeofficial](https://github.com/joeleeofficial)
 - [Contributors from @CodingStudios](https://github.com/codingstudios)
 
 
 ## License
 
 This project is available as open source under the terms of the [AGPL-3.0 License](https://github.com/codingstudios/loh/blob/main/LICENSE)
-
-
-
-

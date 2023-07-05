@@ -1,6 +1,6 @@
 {
   "name": "loh",
-  "version": "1.0.5-beta",
+  "version": "2.0.0",
   "bin": {
     "loh": "index.js"
   },
@@ -27,7 +27,6 @@
     "flatted": "^3.2.7",
     "minimist": "^1.2.8",
     "prettier": "^2.8.8",
-    "socks-proxy-agent": "^8.0.1",
     "user-agents": "^1.0.1378"
   }
 }

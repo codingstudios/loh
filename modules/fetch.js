@@ -1,4 +1,4 @@
-import { parse, stringify, toJSON } from "flatted";
+import { stringify } from "flatted";
 import * as prettier from "prettier";
 import fs from "fs";
 

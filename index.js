@@ -77,7 +77,7 @@ function processArgs() {
         config.headers = JSON.parse(args[option]); // request header
         break;
 
-      case "b":
+      case "B":
       case "body":
         config.body = args[option]; // request body
 
