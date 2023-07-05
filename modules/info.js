@@ -19,13 +19,15 @@ export const help = ({ logo, chalk }) => {
     Options:
     ${chalk.magenta(`
     -u, --url         Url to fetch
-    -t, --type        Type of data to output
     -o, --output      Output file to save data
     -m, --method      Method to use
-    -re, --relay      Use relay
-    -rm, --remove     Remove 
-    -d, --data        Body of the request
+    -d, --display     Display response data output
+    --relay           Use relay
+    -B, --body        Body of the request
     -H, --headers     Headers of the request
+    -r, --repeat      Amount of requests to make repeatedly
+    -t, --timeout     Timeout of the request
+    -p, --proxy       Proxy of the request
     -ua, --useragent  User agent of the request
     `)}
     Usage: ${chalk.blue(`loh <command> [options]`)}

@@ -40,6 +40,7 @@ Run `loh help` to see the list of available commands and options
 | `-w`, `--wait` | Specify the time to wait in (ms) before the next request is made | `loh fetch -u https://loh.js.org --wait 1000 -r 5` |
 | `-H`, `--headers` | Set the request header | `loh fetch -u https://loh.js.org --headers '{"Authorization": "Bearer 1234"}'` |
 | `-B`, `--body` | Set the request body | `loh fetch -u https://loh.js.org --method POST --body '{"value": "hello world"}'` |
+| `-t`, `--timeout` | Timeout of the request | `loh fetch -u https://loh.js.org --timeout 2000` |
 | `-p`, `--proxy` | Set the request proxy | `loh fetch -u https://loh.js.org --proxy user:password@127.0.0.1:9050` |
 | `--relay` | Use a random fetch relay to make the request | `loh fetch -u https://loh.js.org --relay` |
 
